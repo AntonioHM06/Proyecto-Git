@@ -18,15 +18,15 @@
     <p class="subtitulo">Hecha por Geiboys team </p><!-- texto -->
 <!-- El comando "src=" indica de donde va a salir la imagen(url o local) -->
 
-<select name ="tipo">
+<select name ="tipo" id="tipo" onchange="cambiarunidades()">
     <option value ="temperatura">Temperatura</option>
     <option value ="distancia">Distancia</option>
     <option value ="peso">Peso</option>
 </select> 
      <form method="post">
-        <input type="number" name="valor" placeholder="Ingrese el valor">
+        <input type="number" name="valor" placeholder="Ingrese el valor" required>
 
-        <select name="origen">
+        <select name="origen" id="origen">
             <option value="C">Celsius</option>
             <option value="K">Kelvin</option>
             <option value="F">Fahrenheit</option>
@@ -34,13 +34,46 @@
 
         a
 
-        <select name="destino">
+        <select name="destino" id="destino">
             <option value="C">Celsius</option>
             <option value="K">Kelvin</option>
             <option value="F">Fahrenheit</option>
         </select>
         <button type="submit">Convertir</button>
      </form>
+     <script>
+        function cambiarunidades(){
+            let tipo = document.getElementByid("tipo").value;
+            let origen = document.getElementByid("origen");
+            let destino = document.getElementByid("destino");
+
+            origen.innerHTML = "";
+            destino.innerHTML = "";
+
+            let unidades = [];
+            if (tipo === "temperatura"){
+                unidades = ["C", "K", "F"];
+            }
+            else if (tipo === "distancia"){
+                unidades = ["m", "km", "mi"];
+            }
+            else if (tipo === "peso"){
+                unidades = ["g", "kg", "lb"];
+            }
+            else if (tipo === "peso"){
+                unidades = ["g", "kg", "lb"];
+            }
+            unidades.forEach(function(unidad){
+                let option1 = new option (unidad, unidad);
+                let option2 = new option (unidad, unidad);
+                
+                origen.add(option1);
+                destino.add(option2);
+            });
+        }
+        //ejecutar cuando cargue la pagina
+        window.onload = cambiarunidades;
+     </script>
 
      {% if resultado is not none %}
         <h2>Resultado: {{ resultado }}</h2>
