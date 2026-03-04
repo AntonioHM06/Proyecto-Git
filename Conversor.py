@@ -207,6 +207,84 @@ def menu_distancia():
 
 
 
+factores_peso = {
+    "onzas": 28.3495,
+    "gramos": 1,
+    "kilogramos": 1000
+}
+
+
+def mostrar_menu_peso_origen():
+    print("\n--- CONVERSIÓN DE PESO ---")
+    print("1. Onzas")
+    print("2. Gramos")
+    print("3. Kilogramos")
+    print("4. Volver al menú principal")
+
+
+def unidad_por_opcion_peso(op):
+    return {"1": "onzas", "2": "gramos", "3": "kilogramos"}.get(op)
+
+
+def mostrar_menu_peso_destino(unidad_origen):
+    print("\n-- Seleccione unidad destino --")
+    disponibles = {}
+    i = 1
+    for u in factores_peso.keys():
+        if u != unidad_origen:
+            print(f"{i}. {u}")
+            disponibles[str(i)] = u
+            i += 1
+    print(f"{i}. Volver")
+    return disponibles, str(i)
+
+
+def convertir_peso(valor, origen, destino):
+    gramos = valor * factores_peso[origen]
+    return gramos / factores_peso[destino]
+
+
+def menu_peso():
+    while True:
+        mostrar_menu_peso_origen()
+        op_origen = input("Seleccione la unidad de origen (1-4): ").strip()
+
+        if op_origen == "4":
+            return
+
+        unidad_origen = unidad_por_opcion_peso(op_origen)
+        if not unidad_origen:
+            print("Opción inválida.")
+            continue
+
+        try:
+            valor = float(input(f"Ingrese el valor en {unidad_origen}: "))
+        except ValueError:
+            print("Debe ingresar un número válido.")
+            continue
+
+        while True:
+            disponibles, opcion_volver = mostrar_menu_peso_destino(unidad_origen)
+            op_destino = input("Seleccione unidad destino: ").strip()
+
+            if op_destino == opcion_volver:
+                break
+
+            if op_destino not in disponibles:
+                print("Opción inválida.")
+                continue
+
+            unidad_destino = disponibles[op_destino]
+            resultado = convertir_peso(valor, unidad_origen, unidad_destino)
+
+            print(f"\n➡ {valor} {unidad_origen} = {resultado:.4f} {unidad_destino}\n")
+
+            if input("¿Convertir a otra unidad destino? (s/n): ").lower() != "s":
+                break
+
+
+
+
 # ================= INICIO DEL PROGRAMA =================
 def main():
     titulo()
@@ -216,6 +294,9 @@ def main():
 
         if opcion == "1":
             menu_temperatura()
+            titulo()
+        elif opcion == "3":
+            menu_peso()
             titulo()
         elif opcion == "4":
             print("\nAdios perras, Me saludan a su mamá...")
