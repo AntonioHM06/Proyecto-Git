@@ -80,7 +80,7 @@ def index():
             resultado = convertir_temperatura(valor, origen, destino)
          elif tipo == "distancia":
             resultado = convertir_distancia(valor, origen, destino)
-         if tipo == "peso":
+         elif tipo == "peso":
             resultado = convertir_peso(valor, origen, destino)
 
     return render_template("index.html", resultado=resultado)
