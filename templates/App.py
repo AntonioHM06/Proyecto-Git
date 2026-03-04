@@ -202,12 +202,23 @@ def menu_peso():
                 break
 
 
-# ================= FIN DE CONVERSI =================
+# ================= FIN DE CONVERSIONes =================
 
 
 
 # ================= RUTA WEB =================
+@app.route("/", methods=["GET", "POST"])
+def index():
+    resultado = None
+
+    if request.method == "POST":
+         valor = float(request.form["valor"])
+         origen = request.form["origen"]
+         destino = request.form["destino"]
+
+         resultado = convertir_temperatura (valor, origen, destino)
+    return render_template("index.html", resultado=resultado)
 
 
-
-
+if __name__ == "__main__":
+    app.run(debug=True)    
