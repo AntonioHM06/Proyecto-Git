@@ -295,6 +295,9 @@ def main():
         if opcion == "1":
             menu_temperatura()
             titulo()
+        elif opcion == "2":
+            menu_distancia()
+            titulo()
         elif opcion == "3":
             menu_peso()
             titulo()
