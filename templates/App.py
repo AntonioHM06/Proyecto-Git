@@ -43,13 +43,9 @@ factores_distancia = {
 }
 
 
-
-
-
 def convertir_distancia(valor, origen, destino):
     metros = valor * factores_distancia[origen]
     return metros / factores_distancia[destino]
-
 
 
 # =================    PESO   =================
@@ -60,12 +56,9 @@ factores_peso = {
 }
 
 
-
-
 def convertir_peso(valor, origen, destino):
     gramos = valor * factores_peso[origen]
     return gramos / factores_peso[destino]
-
 
 
 # ================= FIN DE CONVERSIONes =================
@@ -78,11 +71,18 @@ def index():
     resultado = None
 
     if request.method == "POST":
+         tipo = request.form["tipo"]
          valor = float(request.form["valor"])
          origen = request.form["origen"]
          destino = request.form["destino"]
+         
+         if tipo == "temperatura":
+            resultado = convertir_temperatura(valor, origen, destino)
+         elif tipo == "distancia":
+            resultado = convertir_distancia(valor, origen, destino)
+         if tipo == "peso":
+            resultado = convertir_peso(valor, origen, destino)
 
-         resultado = convertir_temperatura (valor, origen, destino)
     return render_template("index.html", resultado=resultado)
 
 
