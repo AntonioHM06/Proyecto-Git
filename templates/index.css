@@ -9,8 +9,10 @@ body{
 }
 h1{
     text-align: center;
+    color:azure
 }
 .subtitulo{
+    color:azure;
     text-align: center;
     font-size: 15px;
 }
