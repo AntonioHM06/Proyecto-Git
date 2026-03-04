@@ -16,10 +16,34 @@
 <body>
     <h1>CONVERSOR DE UNIDADES</h1><!-- Titulo  -->
     <p class="subtitulo">Hecha por Geiboys team </p><!-- texto -->
-    <img class="imagen_1"src=""><!--pone una imagen--> -->
 <!-- El comando "src=" indica de donde va a salir la imagen(url o local) -->
 
-     
+<select name ="tipo">
+    <option value ="temperatura">Temperatura</option>
+    <option value ="distancia">Distancia</option>
+</select> 
+     <form method="post">
+        <input type="number" name="valor" placeholder="Ingrese el valor">
+
+        <select name="origen">
+            <option value="C">Celsius</option>
+            <option value="K">Kelvin</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+
+        a
+
+        <select name="destino">
+            <option value="C">Celsius</option>
+            <option value="K">Kelvin</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+        <button type="submit">Convertir</button>
+     </form>
+
+     {% if resultado is not none %}
+        <h2>Resultado: {{ resultado }}</h2>
+        {% endif %}
     <ul><!-- Lista conpuntos -->
         <li></li><!-- elementos de la lista (uno)-->
     </ul>
