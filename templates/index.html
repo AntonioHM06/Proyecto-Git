@@ -31,7 +31,7 @@
             <option value="K">Kelvin</option>
             <option value="F">Fahrenheit</option>
         </select>
-
+        
         a
 
         <select name="destino" id="destino">
@@ -42,37 +42,38 @@
         <button type="submit">Convertir</button>
      </form>
      <script>
-        function cambiarunidades(){
-            let tipo = document.getElementByid("tipo").value;
-            let origen = document.getElementByid("origen");
-            let destino = document.getElementByid("destino");
+    function cambiarunidades() {
+        // Corregido: getElementById (la "I" es mayúscula)
+        var tipo = document.getElementById("tipo").value;
+        var origen = document.getElementById("origen");
+        var destino = document.getElementById("destino");
 
-            origen.innerHTML = "";
-            destino.innerHTML = "";
+        // Limpiar las opciones actuales
+        origen.innerHTML = "";
+        destino.innerHTML = "";
 
-            let unidades = [];
-            if (tipo === "temperatura"){
-                unidades = ["C", "K", "F"];
-            }
-            else if (tipo === "distancia"){
-                unidades = ["m", "km", "mi"];
-            }
-            else if (tipo === "peso"){
-                unidades = ["g", "kg", "lb"];
-            }
-            else if (tipo === "peso"){
-                unidades = ["g", "kg", "lb"];
-            }
-            unidades.forEach(function(unidad){
-                let option1 = new option (unidad, unidad);
-                let option2 = new option (unidad, unidad);
-                
-                origen.add(option1);
-                destino.add(option2);
-            });
+        var unidades = [];
+        if (tipo === "temperatura") {
+            unidades = ["C", "K", "F"];
+        } else if (tipo === "distancia") {
+            unidades = ["m", "km", "mi"];
+        } else if (tipo === "peso") {
+            unidades = ["g", "kg", "lb"];
         }
-        //ejecutar cuando cargue la pagina
-        window.onload = cambiarunidades;
+
+        unidades.forEach(function(unidad) {
+            // Corregido: new Option (la "O" es mayúscula)
+            // El primer parámetro es el texto visible, el segundo es el "value"
+            let option1 = new Option(unidad, unidad);
+            let option2 = new Option(unidad, unidad);
+
+            origen.add(option1);
+            destino.add(option2);
+        });
+    }
+
+    // Ejecutar al cargar la página para que inicie con las unidades correctas
+    window.onload = cambiarunidades;
      </script>
 
      {% if resultado is not none %}
