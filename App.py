@@ -83,8 +83,8 @@ def index():
          elif tipo == "peso":
             resultado = convertir_peso(valor, origen, destino)
 
-         resultado = "{:.2f}".format(resultado)
-         
+         redondeo = "{:.2f}".format(resultado)
+
     return render_template("index.html", resultado=resultado)
 
 
