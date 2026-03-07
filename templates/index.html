@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="stylesheet" href="index.css">
+
 
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Unidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 </head>
 
 
@@ -14,12 +16,15 @@
     <h1>CONVERSOR DE UNIDADES</h1>
     <p class="subtitulo">Hecha por Geiboys team </p>
 
-<select name ="tipo" id="tipo" onchange="cambiarunidades()">
+
+
+     <form method="post">
+        <select name ="tipo" id="tipo" onchange="cambiarunidades()">
     <option value ="temperatura">Temperatura</option>
     <option value ="distancia">Distancia</option>
     <option value ="peso">Peso</option>
-</select> 
-     <form method="post">
+        </select> 
+        
         <input type="number" name="valor" placeholder="Ingrese el valor" required>
 
         <select name="origen" id="origen">
@@ -52,9 +57,9 @@
         if (tipo === "temperatura") {
             unidades = ["C", "K", "F"];
         } else if (tipo === "distancia") {
-            unidades = ["m", "km", "mi"];
+            unidades = ["mm","cm","in","ft","m","km","mi"];
         } else if (tipo === "peso") {
-            unidades = ["g", "kg", "lb"];
+            unidades = ["oz","g","kg","lb"];
         }
 
         unidades.forEach(function(unidad) {
