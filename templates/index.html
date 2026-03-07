@@ -1,29 +1,30 @@
-<!--para iniciar un HTML se usa el comando "html:5" pone todo la base de la pagina -->
-
-
 <!DOCTYPE html>
-<html lang="es"><!--  idioma de la pagina  -->
-<link rel="stylesheet" href="index.css"><!--  esporta la personalizacion del archivo "index.css"  -->
+<html lang="es">
+
 
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Unidades</title><!--Texto de la pestaña-->
+    <title>Conversor de Unidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 </head>
 
 
 <body>
-    <h1>CONVERSOR DE UNIDADES</h1><!-- Titulo  -->
-    <p class="subtitulo">Hecha por Geiboys team </p><!-- texto -->
-<!-- El comando "src=" indica de donde va a salir la imagen(url o local) -->
+    <h1>CONVERSOR DE UNIDADES</h1>
+    <p class="subtitulo">Hecha por Geiboys team </p>
 
-<select name ="tipo" id="tipo" onchange="cambiarunidades()">
+
+
+     <form method="post">
+        <select name ="tipo" id="tipo" onchange="cambiarunidades()">
     <option value ="temperatura">Temperatura</option>
     <option value ="distancia">Distancia</option>
     <option value ="peso">Peso</option>
-</select> 
-     <form method="post">
+        </select> 
+        
         <input type="number" name="valor" placeholder="Ingrese el valor" required>
 
         <select name="origen" id="origen">
@@ -32,7 +33,7 @@
             <option value="F">Fahrenheit</option>
         </select>
         
-        a
+        
 
         <select name="destino" id="destino">
             <option value="C">Celsius</option>
@@ -43,12 +44,12 @@
      </form>
      <script>
     function cambiarunidades() {
-        // Corregido: getElementById (la "I" es mayúscula)
+
         var tipo = document.getElementById("tipo").value;
         var origen = document.getElementById("origen");
         var destino = document.getElementById("destino");
 
-        // Limpiar las opciones actuales
+     
         origen.innerHTML = "";
         destino.innerHTML = "";
 
@@ -56,14 +57,13 @@
         if (tipo === "temperatura") {
             unidades = ["C", "K", "F"];
         } else if (tipo === "distancia") {
-            unidades = ["m", "km", "mi"];
+            unidades = ["mm","cm","in","ft","m","km","mi"];
         } else if (tipo === "peso") {
-            unidades = ["g", "kg", "lb"];
+            unidades = ["oz","g","kg","lb"];
         }
 
         unidades.forEach(function(unidad) {
-            // Corregido: new Option (la "O" es mayúscula)
-            // El primer parámetro es el texto visible, el segundo es el "value"
+
             let option1 = new Option(unidad, unidad);
             let option2 = new Option(unidad, unidad);
 
@@ -72,32 +72,14 @@
         });
     }
 
-    // Ejecutar al cargar la página para que inicie con las unidades correctas
+   
     window.onload = cambiarunidades;
      </script>
 
      {% if resultado is not none %}
         <h2>Resultado: {{ resultado }}</h2>
         {% endif %}
-    <ul><!-- Lista conpuntos -->
-        <li></li><!-- elementos de la lista (uno)-->
-    </ul>
-    
-
-    <ol><!-- Este es un comentario en HTML -->
-        <li></li>
-    </ol>
-    
-    <input type="number" placeholder=""><!-- Solicita entrada de datos(numero, texto, archivos, etc.) -->
-<!-- El comando "type=" indica que tipo de dato queremos que sea ingresado -->
-<!-- El comando "placeholder" la indicacion del dato(solicitud) -->
-
-
-    <div class="joel"><!-- contenedor para organizar, puede separarse en secciones-->
-        <p>div aqui</p><!--Ejemplo de contenido de texto-->
-        <h2>papoi</h2><!--ejemmplo de segundo titulo-->
-    </div>
-
+   
 
 </body>
 </html>
@@ -105,4 +87,4 @@
 
 <!--Este comando pone texto en el codigo-->
 <!-- el comando "class" hace que lo puda pesonalizar en el css -->
-<!--El comando h(numero) sirve para ingresar un titulo-->-->>
+<!--El comando h(numero) sirve para ingresar un titulo-->

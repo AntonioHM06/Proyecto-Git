@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Unidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+   
+</head>
+<body>
+
+    <h1>Conversor de Unidades</h1>
+
+    <form method="POST">
+
+        <!-- Tipo de conversión -->
+        <label>Tipo de conversión:</label>
+        <select name="tipo" id="tipo" onchange="actualizarUnidades()" required>
+            <option value="temperatura">Temperatura</option>
+            <option value="distancia">Distancia</option>
+            <option value="peso">Peso</option>
+        </select>
+
+        <!-- Valor -->
+        <label>Valor:</label>
+        <input type="number" step="any" name="valor" required>
+
+        <!-- Unidad origen -->
+        <label>Unidad origen:</label>
+        <select name="origen" id="origen" required>
+        </select>
+
+        <!-- Unidad destino -->
+        <label>Unidad destino:</label>
+        <select name="destino" id="destino" required>
+        </select>
+
+        <button type="submit">Convertir</button>
+
+    </form>
+
+    <br>
+
+    {% if resultado is not none %}
+        <h2>Resultado: {{ resultado }}</h2>
+    {% endif %}
+
+    <script>
+        
+        const unidades = {
+            temperatura: ["C", "F", "K"],
+            distancia: ["milímetros","centímetros","pulgadas","pies","metros","kilómetros","millas"],
+            peso: ["onzas","gramos","kilogramos"]
+        };
+
+        const origen = document.getElementById("origen");
+        const destino = document.getElementById("destino");
+        const tipo = document.getElementById("tipo");
+
+        function actualizarUnidades() {
+            const tipoSeleccionado = tipo.value;
+            const opciones = unidades[tipoSeleccionado];
+
+          
+            origen.innerHTML = "";
+            destino.innerHTML = "";
+
+          
+            opciones.forEach((u, i) => {
+                let o1 = document.createElement("option");
+                o1.value = u;
+                o1.text = u;
+                if(i===0) o1.selected = true;
+                origen.add(o1);
+
+                let o2 = document.createElement("option");
+                o2.value = u;
+                o2.text = u;
+                if(i===0) o2.selected = true;
+                destino.add(o2);
+            });
+        }
+
+
+    </script>
+
+</body>
+</html>
