@@ -43,3 +43,74 @@ button{
 h2{
     color: rgb(255, 255, 255);
 }
+/* Contenedor de la burbuja para posicionar el cuadro */
+.burbuja {
+    position: relative;
+    display: inline-block;
+}
+
+/* El cuadro de información (Tooltip) */
+.burbuja::after {
+    content: attr(data-info); /* Toma el texto del HTML */
+    position: absolute;
+    bottom: 120%;             /* Lo coloca arriba de la imagen */
+    left: 50%;
+    transform: translateX(-50%) scale(0); /* Empieza invisible y pequeño */
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro elegante */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;      /* Evita que el texto se parta en dos líneas */
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;     /* Para que no estorbe al mouse */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Pequeña flecha debajo del cuadro */
+.burbuja::before {
+    content: "";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+/* Cuando pasas el mouse: se muestra el cuadro y la flecha */
+.burbuja:hover::after, .burbuja:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Estilos de tus contactos (ya los tenías) */
+.contactos-inferior {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 9999;
+}
+
+.contacto {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.contacto:hover {
+    transform: scale(1.1);
+}
