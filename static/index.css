@@ -47,6 +47,14 @@ button{
 h2{
     color: rgb(255, 255, 255);
 }
+
+.texto {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: center;
+}
 /* Contenedor de la burbuja para posicionar el cuadro */
 .burbuja {
     position: relative;
