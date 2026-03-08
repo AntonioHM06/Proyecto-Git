@@ -20,6 +20,7 @@
 
      <form method="post">
         <select name ="tipo" id="tipo" onchange="cambiarunidades()">
+    <option value ="volumen">Volumen</option>
     <option value ="temperatura">Temperatura</option>
     <option value ="distancia">Distancia</option>
     <option value ="peso">Peso</option>
@@ -32,8 +33,7 @@
             <option value="K">Kelvin</option>
             <option value="F">Fahrenheit</option>
         </select>
-        
-        
+
 
         <select name="destino" id="destino">
             <option value="C">Celsius</option>
@@ -60,7 +60,11 @@
             unidades = ["mm","cm","in","ft","m","km","mi"];
         } else if (tipo === "peso") {
             unidades = ["oz","g","kg","lb"];
+        } else if (tipo === "volumen") {
+            unidades = ["L","ml","gal","m3"];
         }
+
+
 
         unidades.forEach(function(unidad) {
 
