@@ -4,6 +4,35 @@ app= Flask(__name__)
 
 
 # ================= CONVERSIONES =================
+#================== VOLUMEN =================
+def to_litros(valor, unidad_origen):
+    if unidad_origen == "L":       # Litros
+        return valor
+    elif unidad_origen == "ml":    # Mililitros
+        return valor / 1000
+    elif unidad_origen == "gal":   # Galones (EE.UU.)
+        return valor * 3.78541
+    elif unidad_origen == "m3":    # Metros cúbicos
+        return valor * 1000
+    else:
+        raise ValueError("Unidad de origen no soportada")
+
+def from_litros(litros_val, unidad_destino):
+    if unidad_destino == "L":
+        return litros_val
+    elif unidad_destino == "mL":
+        return litros_val * 1000
+    elif unidad_destino == "gal":
+        return litros_val / 3.78541
+    elif unidad_destino == "m3":
+        return litros_val / 1000
+    else:
+        raise ValueError("Unidad de destino no soportada")
+
+def convertir_volumen(valor, unidad_origen, unidad_destino):
+    l = to_litros(valor, unidad_origen)
+    return from_litros(l, unidad_destino)
+
 
 # =================  TEMPERATURA =================
 
@@ -76,12 +105,15 @@ def index():
          origen = request.form["origen"]
          destino = request.form["destino"]
          
-         if tipo == "temperatura":
+         if tipo == "volumen":
+            resultado = convertir_volumen(valor, origen, destino)
+         elif tipo == "temperatura":
             resultado = convertir_temperatura(valor, origen, destino)
          elif tipo == "distancia":
             resultado = convertir_distancia(valor, origen, destino)
          elif tipo == "peso":
             resultado = convertir_peso(valor, origen, destino)
+
 
     return render_template("index.html", resultado=resultado)
 
